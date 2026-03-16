@@ -1,0 +1,1105 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={CTA-ED Exercise 5: Unsupervised learning (topic models)},
+  pdfauthor={Junke Guan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{CTA-ED Exercise 5: Unsupervised learning (topic models)}
+\author{Junke Guan}
+\date{11/03/2026}
+
+\begin{document}
+\maketitle
+
+\subsection{Introduction}\label{introduction}
+
+The hands-on exercise for this week focuses on: 1) estimating a topic
+model ; 2) interpreting and visualizing results. Remember that you will
+need to: 1) comment your code and 2) write out the interpretation of
+your results.
+
+You will learn how to:
+
+\begin{itemize}
+\tightlist
+\item
+  Generate document-term-matrices in format appropriate for topic
+  modelling
+\item
+  Estimate a topic model using the \texttt{quanteda} and
+  \texttt{topicmodels} package
+\item
+  Visualize results
+\item
+  Reverse engineer a test of model accuracy
+\item
+  Run some validation tests
+\end{itemize}
+
+\subsection{Setup}\label{setup}
+
+Before proceeding, we'll load the packages we will need for this
+tutorial.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# loads dplyr, ggplot2, and others}
+\FunctionTok{library}\NormalTok{(stringr) }\CommentTok{\# to handle text elements}
+\FunctionTok{library}\NormalTok{(tidytext) }\CommentTok{\# includes set of functions useful for manipulating text}
+\FunctionTok{library}\NormalTok{(topicmodels) }\CommentTok{\# to estimate topic models}
+\FunctionTok{library}\NormalTok{(gutenbergr) }\CommentTok{\# to get text data}
+\FunctionTok{library}\NormalTok{(scales)}
+\FunctionTok{library}\NormalTok{(tm)}
+\FunctionTok{library}\NormalTok{(ggthemes) }\CommentTok{\# to make your plots look nice}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(quanteda)}
+\FunctionTok{library}\NormalTok{(quanteda.textmodels)}
+\end{Highlighting}
+\end{Shaded}
+
+You may need to install the preText package if you haven't done so yet.
+For that you will need to run the next code chunk (it is currently set
+to `eval=F', which tells R `do not execute this code chunk'). That
+package is not readily available on through RStudio directly. It needs
+to be downloaded from the Github repository set up by its creater
+Matthew J Denny. We can do that using the command install\_github().
+This command is part of the `devtools' package, which you will need to
+install as well (if you haven't done so already). The devtools package
+is directly available through R so it can be installed with the usual
+command install\_packages.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install\_package(devtools)}
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"matthewjdenny/preText"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(preText)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Data collection}\label{data-collection}
+
+We'll be using data from Alexis de Tocqueville's ``Democracy in
+America.''
+
+We have already downloaded some data for you, but we also included the
+code to download it yourself (it is currently set to `eval=F' so it
+won't run unless you remove the eval=F argument or you run the chunk
+directly.
+
+The code downloads these data, both Volume 1 and Volume 2, and combine
+them into one data frame. For this, we'll be using the gutenbergr
+package, which allows the user to download text data from over 60,000
+out-of-copyright books. The ID for each book appears in the url for the
+book selected after a search on \url{https://www.gutenberg.org/ebooks/}.
+
+This example is adapted by \href{https://www.tidytextmining.com/}{Text
+Mining with R: A Tidy Approach} by Julia Silge and David Robinson.
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{data/topicmodels/gutenberg.gif}
+
+Here, we see that Volume of Tocqueville's ``Democracy in America'' is
+stored as ``815''. A separate search reveals that Volume 2 is stored as
+``816''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq }\OtherTok{\textless{}{-}} \FunctionTok{gutenberg\_download}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{815}\NormalTok{, }\DecValTok{816}\NormalTok{), }
+                            \AttributeTok{meta\_fields =} \StringTok{"author"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Or we can read the dataset we already downloaded for you in the
+following way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq  }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{gzcon}\NormalTok{(}\FunctionTok{url}\NormalTok{(}\StringTok{"https://github.com/cjbarrie/CTA{-}ED/blob/main/data/topicmodels/tocq.RDS?raw=true"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+Once we have read in these data, we convert it into a different data
+shape: the document-term-matrix. We also create a new columns, which we
+call ``booknumber'' that recordss whether the term in question is from
+Volume 1 or Volume 2. To convert from tidy into ``DocumentTermMatrix''
+format we can first use \texttt{unnest\_tokens()} as we have done in
+past exercises, remove stop words, and then use the \texttt{cast\_dtm()}
+function to convert into a ``DocumentTermMatrix'' object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_words }\OtherTok{\textless{}{-}}\NormalTok{ tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{booknumber =} \FunctionTok{ifelse}\NormalTok{(gutenberg\_id}\SpecialCharTok{==}\DecValTok{815}\NormalTok{, }\StringTok{"DiA1"}\NormalTok{, }\StringTok{"DiA2"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest\_tokens}\NormalTok{(word, text) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(word)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(booknumber, word, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{anti\_join}\NormalTok{(stop\_words)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(word)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_dtm }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_words }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cast\_dtm}\NormalTok{(booknumber, word, n)}
+
+\NormalTok{tm}\SpecialCharTok{::}\FunctionTok{inspect}\NormalTok{(tocq\_dtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 2, terms: 12092)>>
+## Non-/sparse entries: 17581/6603
+## Sparsity           : 27%
+## Maximal term length: 18
+## Weighting          : term frequency (tf)
+## Sample             :
+##       Terms
+## Docs   country democratic government laws nations people power society time
+##   DiA1     357        212        556  397     233    516   543     290  311
+##   DiA2     167        561        162  133     313    360   263     241  309
+##       Terms
+## Docs   united
+##   DiA1    554
+##   DiA2    227
+\end{verbatim}
+
+We see here that the data are now stored as a ``DocumentTermMatrix.'' In
+this format, the matrix records the term (as equivalent of a column) and
+the document (as equivalent of row), and the number of times the term
+appears in the given document. Many terms will not appear in the
+document, meaning that the matrix will be stored as ``sparse,'' meaning
+there will be a preponderance of zeroes. Here, since we are looking only
+at two documents that both come from a single volume set, the sparsity
+is relatively low (only 27\%). In most applications, the sparsity will
+be a lot higher, approaching 99\% or more.
+
+Estimating our topic model is then relatively simple. All we need to do
+if specify how many topics that we want to search for, and we can also
+set our seed, which is needed to reproduce the same results each time
+(as the model is a generative probabilistic one, meaning different
+random iterations will produce different results).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_lda }\OtherTok{\textless{}{-}} \FunctionTok{LDA}\NormalTok{(tocq\_dtm, }\AttributeTok{k =} \DecValTok{10}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{seed =} \DecValTok{1234}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+After this we can extract the per-topic-per-word probabilities, called
+``β'' from the model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_topics }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(tocq\_lda, }\AttributeTok{matrix =} \StringTok{"beta"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(tocq\_topics, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##    topic term          beta
+##    <int> <chr>        <dbl>
+##  1     1 democratic 0.00855
+##  2     2 democratic 0.0115 
+##  3     3 democratic 0.00444
+##  4     4 democratic 0.0193 
+##  5     5 democratic 0.00254
+##  6     6 democratic 0.00866
+##  7     7 democratic 0.00165
+##  8     8 democratic 0.0108 
+##  9     9 democratic 0.00276
+## 10    10 democratic 0.00334
+\end{verbatim}
+
+We now have data stored as one topic-per-term-per-row. The betas listed
+here represent the probability that the given term belongs to a given
+topic. So, here, we see that the term ``democratic'' is most likely to
+belong to topic 4. Strictly, this probability represents the probability
+that the term is generated from the topic in question.
+
+We can then plots the top terms, in terms of beta, for each topic as
+follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_top\_terms }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_topics }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(topic) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{top\_n}\NormalTok{(}\DecValTok{10}\NormalTok{, beta) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{beta)}
+
+\NormalTok{tocq\_top\_terms }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{reorder\_within}\NormalTok{(term, beta, topic)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(beta, term, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ topic, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_reordered}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_tufte}\NormalTok{(}\AttributeTok{base\_family =} \StringTok{"Helvetica"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{unsupervised-topicmodels_files/figure-latex/unnamed-chunk-8-1.pdf}}
+
+But how do we actually evaluate these topics? Here, the topics all seem
+pretty similar.
+
+\subsection{Evaluating topic model}\label{evaluating-topic-model}
+
+Well, one way to evaluate the performance of unspervised forms of
+classification is by testing our model on an outcome that is already
+known.
+
+Here, two topics that are most obvious are the `topics' Volume 1 and
+Volume 2 of Tocqueville's ``Democracy in America.'' Volume 1 of
+Tocqueville's work deals more obviously with abstract constitutional
+ideas and questions of race; Volume 2 focuses on more esoteric aspects
+of American society. Listen an ``In Our Time'' episode with Melvyn Bragg
+discussing Democracy in America
+\href{https://www.bbc.co.uk/programmes/b09vyw0x}{here}.
+
+Given these differences in focus, we might think that a generative model
+could accurately assign to topic (i.e., Volume) with some accuracy.
+
+\subsubsection{Plot relative word
+frequencies}\label{plot-relative-word-frequencies}
+
+First let's have a look and see whether there really are words obviously
+distinguishing the two Volumes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tidy\_tocq }\OtherTok{\textless{}{-}}\NormalTok{ tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest\_tokens}\NormalTok{(word, text) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{anti\_join}\NormalTok{(stop\_words)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(word)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Count most common words in both}
+\NormalTok{tidy\_tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(word, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12,092 x 2
+##    word           n
+##    <chr>      <int>
+##  1 people       876
+##  2 power        806
+##  3 united       781
+##  4 democratic   773
+##  5 government   718
+##  6 time         620
+##  7 nations      546
+##  8 society      531
+##  9 laws         530
+## 10 country      524
+## # i 12,082 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bookfreq }\OtherTok{\textless{}{-}}\NormalTok{ tidy\_tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{booknumber =} \FunctionTok{ifelse}\NormalTok{(gutenberg\_id}\SpecialCharTok{==}\DecValTok{815}\NormalTok{, }\StringTok{"DiA1"}\NormalTok{, }\StringTok{"DiA2"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{word =} \FunctionTok{str\_extract}\NormalTok{(word, }\StringTok{"[a{-}z\textquotesingle{}]+"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(booknumber, word) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(booknumber) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{spread}\NormalTok{(booknumber, proportion)}
+
+\FunctionTok{ggplot}\NormalTok{(bookfreq, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ DiA1, }\AttributeTok{y =}\NormalTok{ DiA2, }\AttributeTok{color =} \FunctionTok{abs}\NormalTok{(DiA1 }\SpecialCharTok{{-}}\NormalTok{ DiA2))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{color =} \StringTok{"gray40"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{size =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{height =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ word), }\AttributeTok{check\_overlap =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_log10}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{percent\_format}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_log10}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{percent\_format}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_gradient}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.001}\NormalTok{), }\AttributeTok{low =} \StringTok{"darkslategray4"}\NormalTok{, }\AttributeTok{high =} \StringTok{"gray75"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_tufte}\NormalTok{(}\AttributeTok{base\_family =} \StringTok{"Helvetica"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position=}\StringTok{"none"}\NormalTok{, }
+        \AttributeTok{strip.background =} \FunctionTok{element\_blank}\NormalTok{(), }
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tocqueville DiA 2"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tocqueville DiA 1"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_equal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 6173 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 6174 rows containing missing values or values outside the scale range
+## (`geom_text()`).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{unsupervised-topicmodels_files/figure-latex/unnamed-chunk-9-1.pdf}}
+
+We see that there do seem to be some marked distinguishing
+characteristics. In the plot above, for example, we see that more
+abstract notions of state systems appear with greater frequency in
+Volume 1 while Volume 2 seems to contain words specific to America
+(e.g., ``north'' and ``south'') with greater frequency. The way to read
+the above plot is that words positioned further away from the diagonal
+line appear with greater frequency in one volume versus the other.
+
+\subsubsection{Split into chapter
+documents}\label{split-into-chapter-documents}
+
+In the below, we first separate the volumes into chapters, then we
+repeat the same procedure as above. The only difference now is that
+instead of two documents representing the two full volumes of
+Tocqueville's work, we now have 132 documents, each representing an
+individual chapter. Notice now that the sparsity is much increased:
+around 96\%.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq }\OtherTok{\textless{}{-}}\NormalTok{ tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(text))}
+
+\CommentTok{\# Divide into documents, each representing one chapter}
+\NormalTok{tocq\_chapter }\OtherTok{\textless{}{-}}\NormalTok{ tocq }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{booknumber =} \FunctionTok{ifelse}\NormalTok{(gutenberg\_id}\SpecialCharTok{==}\DecValTok{815}\NormalTok{, }\StringTok{"DiA1"}\NormalTok{, }\StringTok{"DiA2"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(booknumber) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{chapter =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(text, }\FunctionTok{regex}\NormalTok{(}\StringTok{"\^{}chapter "}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(chapter }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unite}\NormalTok{(document, booknumber, chapter)}
+
+\CommentTok{\# Split into words}
+\NormalTok{tocq\_chapter\_word }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_chapter }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest\_tokens}\NormalTok{(word, text)}
+
+\CommentTok{\# Find document{-}word counts}
+\NormalTok{tocq\_word\_counts }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_chapter\_word }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{anti\_join}\NormalTok{(stop\_words) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(document, word, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(word)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_word\_counts}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 69,781 x 3
+##    document word             n
+##    <chr>    <chr>        <int>
+##  1 DiA2_76  united          88
+##  2 DiA2_60  honor           70
+##  3 DiA1_52  union           66
+##  4 DiA2_76  president       60
+##  5 DiA2_76  law             59
+##  6 DiA1_42  jury            57
+##  7 DiA2_76  time            50
+##  8 DiA1_11  township        49
+##  9 DiA1_21  federal         48
+## 10 DiA2_76  constitution    48
+## # i 69,771 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cast into DTM format for LDA analysis}
+
+\NormalTok{tocq\_chapters\_dtm }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_word\_counts }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cast\_dtm}\NormalTok{(document, word, n)}
+
+\NormalTok{tm}\SpecialCharTok{::}\FunctionTok{inspect}\NormalTok{(tocq\_chapters\_dtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 132, terms: 11898)>>
+## Non-/sparse entries: 69781/1500755
+## Sparsity           : 96%
+## Maximal term length: 18
+## Weighting          : term frequency (tf)
+## Sample             :
+##          Terms
+## Docs      country democratic government laws nations people power public time
+##   DiA1_11      10          0         23   19       7     13    19     15    6
+##   DiA1_13      13          5         34    9      12     17    37     15    6
+##   DiA1_20       9          0         25   13       2     14    32     13   10
+##   DiA1_21       4          0         20   29       6     12    20      5    5
+##   DiA1_23      10          0         35    9      24     20    13      4    8
+##   DiA1_31       7         12         10   13       4     30    18     31    6
+##   DiA1_32      10         14         25    6       9     25    11     43    8
+##   DiA1_47      12          2          5    3       3      6     8      0    3
+##   DiA1_56      12          0          3    7      19      3     8      3   22
+##   DiA2_76      11         10         24   39      12     31    27     27   50
+##          Terms
+## Docs      united
+##   DiA1_11     13
+##   DiA1_13     19
+##   DiA1_20     21
+##   DiA1_21     23
+##   DiA1_23     15
+##   DiA1_31     11
+##   DiA1_32     14
+##   DiA1_47      8
+##   DiA1_56     25
+##   DiA2_76     88
+\end{verbatim}
+
+We then re-estimate the topic model with this new DocumentTermMatrix
+object, specifying k equal to 2. This will enable us to evaluate whether
+a topic model is able to generatively assign to volume with accuracy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_chapters\_lda }\OtherTok{\textless{}{-}} \FunctionTok{LDA}\NormalTok{(tocq\_chapters\_dtm, }\AttributeTok{k =} \DecValTok{2}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{seed =} \DecValTok{1234}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+After this, it is worth looking at another output of the latent
+dirichlet allocation procedure. The γ probability represents the
+per-document-per-topic probability or, in other words, the probability
+that a given document (here: chapter) belongs to a particular topic (and
+here, we are assuming these topics represent volumes).
+
+The gamma values are therefore the estimated proportion of words within
+a given chapter allocated to a given volume.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tocq\_chapters\_gamma }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(tocq\_chapters\_lda, }\AttributeTok{matrix =} \StringTok{"gamma"}\NormalTok{)}
+\NormalTok{tocq\_chapters\_gamma}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 264 x 3
+##    document topic     gamma
+##    <chr>    <int>     <dbl>
+##  1 DiA2_76      1 0.551    
+##  2 DiA2_60      1 1.000    
+##  3 DiA1_52      1 0.0000464
+##  4 DiA1_42      1 0.0000746
+##  5 DiA1_11      1 0.0000382
+##  6 DiA1_21      1 0.0000437
+##  7 DiA1_20      1 0.0000425
+##  8 DiA1_28      1 0.249    
+##  9 DiA1_50      1 0.0000477
+## 10 DiA1_22      1 0.0000466
+## # i 254 more rows
+\end{verbatim}
+
+\subsubsection{Examine consensus}\label{examine-consensus}
+
+Now that we have these topic probabilities, we can see how well our
+unsupervised learning did at distinguishing the two volumes generatively
+just from the words contained in each chapter.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# First separate the document name into title and chapter}
+
+\NormalTok{tocq\_chapters\_gamma }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_chapters\_gamma }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(document, }\FunctionTok{c}\NormalTok{(}\StringTok{"title"}\NormalTok{, }\StringTok{"chapter"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{, }\AttributeTok{convert =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{tocq\_chapter\_classifications }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_chapters\_gamma }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(title, chapter) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{top\_n}\NormalTok{(}\DecValTok{1}\NormalTok{, gamma) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+
+\NormalTok{tocq\_book\_topics }\OtherTok{\textless{}{-}}\NormalTok{ tocq\_chapter\_classifications }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(title, topic) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(title) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{top\_n}\NormalTok{(}\DecValTok{1}\NormalTok{, n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{transmute}\NormalTok{(}\AttributeTok{consensus =}\NormalTok{ title, topic)}
+
+\NormalTok{tocq\_chapter\_classifications }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(tocq\_book\_topics, }\AttributeTok{by =} \StringTok{"topic"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(title }\SpecialCharTok{!=}\NormalTok{ consensus)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 5
+##    title chapter topic gamma consensus
+##    <chr>   <int> <int> <dbl> <chr>    
+##  1 DiA1       45     1 0.762 DiA2     
+##  2 DiA1        5     1 0.504 DiA2     
+##  3 DiA1       33     1 0.570 DiA2     
+##  4 DiA1       34     1 0.626 DiA2     
+##  5 DiA1       41     1 0.512 DiA2     
+##  6 DiA1       44     1 0.765 DiA2     
+##  7 DiA1        8     1 0.791 DiA2     
+##  8 DiA1        4     1 0.717 DiA2     
+##  9 DiA1       35     1 0.576 DiA2     
+## 10 DiA1       39     1 0.577 DiA2     
+## 11 DiA1        7     1 0.687 DiA2     
+## 12 DiA1       29     1 0.983 DiA2     
+## 13 DiA1        6     1 0.707 DiA2     
+## 14 DiA2       27     2 0.654 DiA1     
+## 15 DiA2       21     2 0.510 DiA1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Look document{-}word pairs were to see which words in each documents were assigned}
+\CommentTok{\# to a given topic}
+
+\NormalTok{assignments }\OtherTok{\textless{}{-}} \FunctionTok{augment}\NormalTok{(tocq\_chapters\_lda, }\AttributeTok{data =}\NormalTok{ tocq\_chapters\_dtm)}
+\NormalTok{assignments}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 69,781 x 4
+##    document term   count .topic
+##    <chr>    <chr>  <dbl>  <dbl>
+##  1 DiA2_76  united    88      2
+##  2 DiA2_60  united     6      1
+##  3 DiA1_52  united    11      2
+##  4 DiA1_42  united     7      2
+##  5 DiA1_11  united    13      2
+##  6 DiA1_21  united    23      2
+##  7 DiA1_20  united    21      2
+##  8 DiA1_28  united    14      2
+##  9 DiA1_50  united     5      2
+## 10 DiA1_22  united     8      2
+## # i 69,771 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{assignments }\OtherTok{\textless{}{-}}\NormalTok{ assignments }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(document, }\FunctionTok{c}\NormalTok{(}\StringTok{"title"}\NormalTok{, }\StringTok{"chapter"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{, }\AttributeTok{convert =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(tocq\_book\_topics, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{".topic"} \OtherTok{=} \StringTok{"topic"}\NormalTok{))}
+
+\NormalTok{assignments }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(title, consensus, }\AttributeTok{wt =}\NormalTok{ count) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(title) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{percent =}\NormalTok{ n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(consensus, title, }\AttributeTok{fill =}\NormalTok{ percent)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient2}\NormalTok{(}\AttributeTok{high =} \StringTok{"red"}\NormalTok{, }\AttributeTok{label =} \FunctionTok{percent\_format}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ consensus, }\AttributeTok{y =}\NormalTok{ title, }\AttributeTok{label =}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(percent))) }\SpecialCharTok{+}
+  \FunctionTok{theme\_tufte}\NormalTok{(}\AttributeTok{base\_family =} \StringTok{"Helvetica"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{),}
+        \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Book words assigned to"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Book words came from"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"\% of assignments"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{unsupervised-topicmodels_files/figure-latex/unnamed-chunk-13-1.pdf}}
+
+Not bad! We see that the model estimated with accuracy 91\% of chapters
+in Volume 2 and 79\% of chapters in Volume 1
+
+\subsection{Validation}\label{validation}
+
+In the articles by @ying\_topics\_2021 and @denny\_text\_2018 from this
+and previous weeks, we read about potential validation techniques.
+
+In this section, we'll be using the \texttt{preText} package mentioned
+in @denny\_text\_2018 to see the impact of different pre-processing
+choices on our text. Here, I am adapting from a
+\href{http://www.mjdenny.com/getting_started_with_preText.html}{tutorial}
+by Matthew Denny.
+
+First we need to reformat our text into a \texttt{quanteda} corpus
+object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load in corpus of Tocequeville text data.}
+\NormalTok{corp }\OtherTok{\textless{}{-}} \FunctionTok{corpus}\NormalTok{(tocq, }\AttributeTok{text\_field =} \StringTok{"text"}\NormalTok{)}
+\CommentTok{\# use first 10 documents for example}
+\NormalTok{documents }\OtherTok{\textless{}{-}}\NormalTok{ corp[}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30000}\NormalTok{,}\DecValTok{1000}\NormalTok{)]}
+\CommentTok{\# take a look at the document names}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{names}\NormalTok{(documents[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "text9079"  "text4245"  "text8249"  "text16921" "text11970" "text21533"
+##  [7] "text3033"  "text4502"  "text17293" "text26455"
+\end{verbatim}
+
+And now we are ready to preprocess in different ways. Here, we are
+including n-grams so we are preprocessing the text in 128 different
+ways. This takes about ten minutes to run on a machine with 8GB RAM.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preprocessed\_documents }\OtherTok{\textless{}{-}} \FunctionTok{factorial\_preprocessing}\NormalTok{(}
+\NormalTok{    documents,}
+    \AttributeTok{use\_ngrams =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{infrequent\_term\_threshold =} \FloatTok{0.2}\NormalTok{,}
+    \AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can then get the results of our pre-processing, comparing the
+distance between documents that have been processed in different ways.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preText\_results }\OtherTok{\textless{}{-}} \FunctionTok{preText}\NormalTok{(}
+\NormalTok{    preprocessed\_documents,}
+    \AttributeTok{dataset\_name =} \StringTok{"Tocqueville text"}\NormalTok{,}
+    \AttributeTok{distance\_method =} \StringTok{"cosine"}\NormalTok{,}
+    \AttributeTok{num\_comparisons =} \DecValTok{20}\NormalTok{,}
+    \AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And we can plot these accordingly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{preText\_score\_plot}\NormalTok{(preText\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{data/topicmodels/pretext_results.png}
+
+\subsection{Exercises}\label{exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Choose another book or set of books from Project Gutenberg
+\item
+  Run your own topic model on these books, changing the k of topics, and
+  evaluating accuracy.
+\item
+  Validate different pre-processing techniques using \texttt{preText} on
+  the new book(s) of your choice.
+\end{enumerate}
+
+For this exercise, I analyse Jane Austen's \emph{Pride and Prejudice}
+(Project Gutenberg ID: 1342). The novel is divided into chapters, which
+are treated as individual documents for topic modelling.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book }\OtherTok{\textless{}{-}} \FunctionTok{gutenberg\_download}\NormalTok{(}\DecValTok{1342}\NormalTok{, }\AttributeTok{meta\_fields =} \StringTok{"author"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Using mirror https://aleph.pglaf.org.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(book)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   gutenberg_id text                                             author      
+##          <int> <chr>                                            <chr>       
+## 1         1342 "                            [Illustration:"     Austen, Jane
+## 2         1342 ""                                               Austen, Jane
+## 3         1342 "                             GEORGE ALLEN"      Austen, Jane
+## 4         1342 "                               PUBLISHER"       Austen, Jane
+## 5         1342 ""                                               Austen, Jane
+## 6         1342 "                        156 CHARING CROSS ROAD" Austen, Jane
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_chapters }\OtherTok{\textless{}{-}}\NormalTok{ book }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(text)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{chapter =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(text, }\FunctionTok{regex}\NormalTok{(}\StringTok{"\^{}chapter"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(chapter }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(book\_chapters)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+##   gutenberg_id text                                               author chapter
+##          <int> <chr>                                              <chr>    <int>
+## 1         1342 "Chapter I.]"                                      Auste~       1
+## 2         1342 ""                                                 Auste~       1
+## 3         1342 ""                                                 Auste~       1
+## 4         1342 "It is a truth universally acknowledged, that a s~ Auste~       1
+## 5         1342 "of a good fortune must be in want of a wife."     Auste~       1
+## 6         1342 ""                                                 Auste~       1
+\end{verbatim}
+
+To estimate a topic model, the text needs to be divided into multiple
+documents. In this analysis, each chapter of \emph{Pride and Prejudice}
+is treated as a separate document. This approach allows the model to
+identify thematic differences across chapters of the novel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_words }\OtherTok{\textless{}{-}}\NormalTok{ book\_chapters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest\_tokens}\NormalTok{(word, text)}
+
+\FunctionTok{head}\NormalTok{(book\_words)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+##   gutenberg_id author       chapter word   
+##          <int> <chr>          <int> <chr>  
+## 1         1342 Austen, Jane       1 chapter
+## 2         1342 Austen, Jane       1 i      
+## 3         1342 Austen, Jane       1 it     
+## 4         1342 Austen, Jane       1 is     
+## 5         1342 Austen, Jane       1 a      
+## 6         1342 Austen, Jane       1 truth
+\end{verbatim}
+
+Next, the text is tokenized into individual words using the
+\texttt{unnest\_tokens()} function from the tidytext package. This
+converts the text into a tidy format where each row represents a single
+word. Tokenization is an important preprocessing step in text analysis,
+as it allows us to analyse word frequencies and construct a
+document-term matrix for topic modelling.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_word\_counts }\OtherTok{\textless{}{-}}\NormalTok{ book\_words }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{anti\_join}\NormalTok{(stop\_words) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(chapter, word, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining with `by = join_by(word)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(book\_word\_counts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   chapter word          n
+##     <int> <chr>     <int>
+## 1      43 elizabeth    36
+## 2      18 darcy        33
+## 3      18 elizabeth    25
+## 4       8 bingley      21
+## 5      16 darcy        21
+## 6      29 lady         21
+\end{verbatim}
+
+Common stopwords such as ``the'', ``and'', and ``of'' are removed
+because they do not carry meaningful semantic information. Removing
+these words helps the topic model focus on more informative terms. After
+removing stopwords, we count how frequently each word appears in each
+chapter of the novel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_dtm }\OtherTok{\textless{}{-}}\NormalTok{ book\_word\_counts }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cast\_dtm}\NormalTok{(chapter, word, n)}
+
+\NormalTok{tm}\SpecialCharTok{::}\FunctionTok{inspect}\NormalTok{(book\_dtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 61, terms: 6014)>>
+## Non-/sparse entries: 26589/340265
+## Sparsity           : 93%
+## Maximal term length: 17
+## Weighting          : term frequency (tf)
+## Sample             :
+##     Terms
+## Docs bennet bingley darcy elizabeth jane lady miss sister time wickham
+##   16      3       4    21        18    0    9    5      2    5      17
+##   18     10      19    33        25   10   13   11      7   11      16
+##   29      2       0     1        12    0   21    9      0    1       1
+##   35      1       4     4         2    0    1    2      7    4      11
+##   43      0       1    14        36    0    4    7      5   11       4
+##   46      0       0     9        11    6    0    1      3    5       5
+##   47      7       0     3        18   15    1    3      5    3      11
+##   52      2       0    10         5    2    2    2      6    6      14
+##   53     12      13     7        14   13    0    3     10    7       2
+##   56     18       1     6        19    1   16   15      2    0       0
+\end{verbatim}
+
+The dataset is converted into a DocumentTermMatrix (DTM) where each row
+represents a chapter and each column represents a word. The values in
+the matrix correspond to the number of times a word appears in a
+chapter. The resulting matrix contains 61 documents (chapters) and 6014
+unique terms. As expected in text data, the matrix is sparse, with about
+93\% of the entries being zeros, meaning that most words do not appear
+in most chapters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_lda }\OtherTok{\textless{}{-}} \FunctionTok{LDA}\NormalTok{(book\_dtm, }\AttributeTok{k =} \DecValTok{5}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{seed =} \DecValTok{1234}\NormalTok{))}
+\NormalTok{book\_topics }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(book\_lda, }\AttributeTok{matrix =} \StringTok{"beta"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(book\_topics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   topic term         beta
+##   <int> <chr>       <dbl>
+## 1     1 elizabeth 0.0172 
+## 2     2 elizabeth 0.0125 
+## 3     3 elizabeth 0.0127 
+## 4     4 elizabeth 0.0223 
+## 5     5 elizabeth 0.0146 
+## 6     1 darcy     0.00882
+\end{verbatim}
+
+We estimate a Latent Dirichlet Allocation (LDA) topic model with five
+topics using the DocumentTermMatrix created earlier. LDA identifies
+groups of words that frequently appear together across chapters. We then
+extract the beta values, which represent the probability that a word
+belongs to a specific topic. Higher beta values indicate stronger
+associations between words and topics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_top\_terms }\OtherTok{\textless{}{-}}\NormalTok{ book\_topics }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(topic) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_max}\NormalTok{(beta, }\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{beta)}
+
+\NormalTok{book\_top\_terms}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 50 x 3
+##    topic term            beta
+##    <int> <chr>          <dbl>
+##  1     1 elizabeth    0.0172 
+##  2     1 jane         0.0131 
+##  3     1 bingley      0.0108 
+##  4     1 bennet       0.00978
+##  5     1 darcy        0.00882
+##  6     1 time         0.00769
+##  7     1 miss         0.00750
+##  8     1 dear         0.00666
+##  9     1 sister       0.00635
+## 10     1 illustration 0.00499
+## # i 40 more rows
+\end{verbatim}
+
+To interpret the topics produced by the LDA model, we extract the ten
+words with the highest beta values for each topic. These words represent
+the most probable terms associated with each topic. The resulting topics
+appear to capture major themes and character interactions in the novel.
+For example, some topics are dominated by character names such as
+Elizabeth, Darcy, and Bennet, reflecting the central relationships in
+the story. Other topics include words such as Collins, Lady, and
+Catherine, which relate to social hierarchy and marriage proposals.
+Another topic includes words such as Wickham and letter, suggesting
+narrative moments involving conflict and revelations in the plot.
+Overall, the topics capture recurring character interactions and social
+dynamics within the novel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_top\_terms }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{reorder\_within}\NormalTok{(term, beta, topic)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(beta, term, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ topic, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_reordered}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{unsupervised-topicmodels_files/figure-latex/unnamed-chunk-25-1.pdf}}
+The figure shows the most important words associated with each of the
+five topics estimated by the LDA model. The bar charts display the top
+ten words with the highest beta values for each topic, indicating the
+strength of association between words and topics. The topics appear to
+capture central elements of the novel. Several topics are dominated by
+character names such as Elizabeth, Darcy, Jane, and Bennet, reflecting
+the importance of interpersonal relationships in the story. One topic
+includes words such as Collins, Lady, and Catherine, which relate to
+social hierarchy and marriage proposals. Another topic contains words
+such as Wickham, Lydia, and letter, suggesting plot developments
+involving conflict and revelations. Overall, the topic model
+successfully captures recurring character interactions and social
+dynamics in the novel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_lda\_8 }\OtherTok{\textless{}{-}} \FunctionTok{LDA}\NormalTok{(book\_dtm, }\AttributeTok{k =} \DecValTok{8}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{seed =} \DecValTok{1234}\NormalTok{))}
+
+\NormalTok{book\_topics\_8 }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(book\_lda\_8, }\AttributeTok{matrix =} \StringTok{"beta"}\NormalTok{)}
+
+\NormalTok{book\_top\_terms\_8 }\OtherTok{\textless{}{-}}\NormalTok{ book\_topics\_8 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(topic) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_max}\NormalTok{(beta, }\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{beta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{book\_top\_terms\_8 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{reorder\_within}\NormalTok{(term, beta, topic)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(beta, term, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ topic, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_reordered}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{unsupervised-topicmodels_files/figure-latex/unnamed-chunk-27-1.pdf}}
+This figure presents the topics identified when the number of topics is
+increased to eight. Compared to the five-topic model, the eight-topic
+model produces more fine-grained distinctions between themes in the
+novel. While several topics continue to be dominated by character names
+such as Elizabeth, Darcy, and Bennet, additional topics capture more
+specific narrative elements, such as interactions involving Mr Collins,
+the Wickham storyline, and family relationships. Increasing the number
+of topics allows the model to separate certain narrative elements into
+more specialized clusters. However, because character names dominate the
+vocabulary of the novel, some overlap between topics remains. Overall,
+the eight-topic model provides more detailed thematic distinctions but
+may be slightly harder to interpret compared to the five-topic model.
+
+Overall, the topic models capture key themes in the novel, particularly
+interpersonal relationships and social dynamics among central
+characters. The five-topic model provides a clearer and more
+interpretable overview of the main narrative themes, while the
+eight-topic model reveals more specific sub-themes within the story.
+This comparison highlights how the choice of the number of topics
+influences the granularity and interpretability of topic modeling
+results.
+
+\end{document}
