@@ -2,9 +2,7 @@
 title: "CTA-ED Exercise 5: Unsupervised learning (topic models)"
 author: Junke Guan; Cullen; Xiao wen Leng; Yunnuo; Yan Ge
 date: "11/03/2026"
-output:
-  html_document: default
-  pdf_document: default
+output: word_document
 ---
 ## Introduction
 
