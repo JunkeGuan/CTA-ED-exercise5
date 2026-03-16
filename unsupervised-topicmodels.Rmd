@@ -1,8 +1,10 @@
 ---
 title: "CTA-ED Exercise 5: Unsupervised learning (topic models)"
-author: "[Names of all group members here]"
-date: "13/03/2024"
-output: html_document
+author: "Junke Guan"
+date: "11/03/2026"
+output:
+  pdf_document: default
+  html_document: default
 ---
 ## Introduction
 
@@ -345,3 +347,95 @@ preText_score_plot(preText_results)
 1. Choose another book or set of books from Project Gutenberg
 2. Run your own topic model on these books, changing the k of topics, and evaluating accuracy.
 3. Validate different pre-processing techniques using `preText` on the new book(s) of your choice. 
+
+For this exercise, I analyse Jane Austen's *Pride and Prejudice* (Project Gutenberg ID: 1342). The novel is divided into chapters, which are treated as individual documents for topic modelling.
+```{r}
+book <- gutenberg_download(1342, meta_fields = "author")
+head(book)
+```
+```{r}
+book_chapters <- book %>%
+  filter(!is.na(text)) %>%
+  mutate(chapter = cumsum(str_detect(text, regex("^chapter", ignore_case = TRUE)))) %>%
+  filter(chapter > 0)
+
+head(book_chapters)
+```
+To estimate a topic model, the text needs to be divided into multiple documents. 
+In this analysis, each chapter of *Pride and Prejudice* is treated as a separate document. This approach allows the model to identify thematic differences across chapters of the novel.
+```{r}
+book_words <- book_chapters %>%
+  unnest_tokens(word, text)
+
+head(book_words)
+```
+Next, the text is tokenized into individual words using the `unnest_tokens()` function from the tidytext package. This converts the text into a tidy format where each row represents a single word. Tokenization is an important preprocessing step in text analysis, as it allows us to analyse word frequencies and construct a document-term matrix for topic modelling.
+```{r}
+book_word_counts <- book_words %>%
+  anti_join(stop_words) %>%
+  count(chapter, word, sort = TRUE)
+
+head(book_word_counts)
+```
+Common stopwords such as "the", "and", and "of" are removed because they do not carry meaningful semantic information. Removing these words helps the topic model focus on more informative terms. After removing stopwords, we count how frequently each word appears in each chapter of the novel.
+```{r}
+book_dtm <- book_word_counts %>%
+  cast_dtm(chapter, word, n)
+
+tm::inspect(book_dtm)
+```
+The dataset is converted into a DocumentTermMatrix (DTM) where each row represents a chapter and each column represents a word. The values in the matrix correspond to the number of times a word appears in a chapter. The resulting matrix contains 61 documents (chapters) and 6014 unique terms. As expected in text data, the matrix is sparse, with about 93% of the entries being zeros, meaning that most words do not appear in most chapters.
+
+```{r}
+book_lda <- LDA(book_dtm, k = 5, control = list(seed = 1234))
+book_topics <- tidy(book_lda, matrix = "beta")
+head(book_topics)
+```
+We estimate a Latent Dirichlet Allocation (LDA) topic model with five topics using the DocumentTermMatrix created earlier. LDA identifies groups of words that frequently appear together across chapters. We then extract the beta values, which represent the probability that a word belongs to a specific topic. Higher beta values indicate stronger associations between words and topics.
+```{r}
+book_top_terms <- book_topics %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+book_top_terms
+```
+To interpret the topics produced by the LDA model, we extract the ten words with the highest beta values for each topic. These words represent the most probable terms associated with each topic. 
+The resulting topics appear to capture major themes and character interactions in the novel. For example, some topics are dominated by character names such as Elizabeth, Darcy, and Bennet, reflecting the central relationships in the story. Other topics include words such as Collins, Lady, and Catherine, which relate to social hierarchy and marriage proposals. Another topic includes words such as Wickham and letter, suggesting narrative moments involving conflict and revelations in the plot. Overall, the topics capture recurring character interactions and social dynamics within the novel.
+```{r}
+book_top_terms %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  scale_y_reordered() +
+  theme_minimal()
+```
+The figure shows the most important words associated with each of the five topics estimated by the LDA model. The bar charts display the top ten words with the highest beta values for each topic, indicating the strength of association between words and topics.
+The topics appear to capture central elements of the novel. Several topics are dominated by character names such as Elizabeth, Darcy, Jane, and Bennet, reflecting the importance of interpersonal relationships in the story. One topic includes words such as Collins, Lady, and Catherine, which relate to social hierarchy and marriage proposals. Another topic contains words such as Wickham, Lydia, and letter, suggesting plot developments involving conflict and revelations. Overall, the topic model successfully captures recurring character interactions and social dynamics in the novel.
+```{r}
+book_lda_8 <- LDA(book_dtm, k = 8, control = list(seed = 1234))
+
+book_topics_8 <- tidy(book_lda_8, matrix = "beta")
+
+book_top_terms_8 <- book_topics_8 %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+```
+```{r}
+book_top_terms_8 %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  scale_y_reordered() +
+  theme_minimal()
+```
+This figure presents the topics identified when the number of topics is increased to eight. Compared to the five-topic model, the eight-topic model produces more fine-grained distinctions between themes in the novel. While several topics continue to be dominated by character names such as Elizabeth, Darcy, and Bennet, additional topics capture more specific narrative elements, such as interactions involving Mr Collins, the Wickham storyline, and family relationships. 
+Increasing the number of topics allows the model to separate certain narrative elements into more specialized clusters. However, because character names dominate the vocabulary of the novel, some overlap between topics remains. Overall, the eight-topic model provides more detailed thematic distinctions but may be slightly harder to interpret compared to the five-topic model.
+
+Overall, the topic models capture key themes in the novel, particularly interpersonal relationships and social dynamics among central characters. The five-topic model provides a clearer and more interpretable overview of the main narrative themes, while the eight-topic model reveals more specific sub-themes within the story. This comparison highlights how the choice of the number of topics influences the granularity and interpretability of topic modeling results.
+
